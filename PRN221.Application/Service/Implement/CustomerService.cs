@@ -40,5 +40,44 @@ namespace PRN221.Application.Service.Implement
                                  .SetProperty(c => c.Password, customer.Password)
                                  .SetProperty(c => c.Telephone, customer.Telephone));
         }
+
+        public (bool, string) UpdateValidate(Customer customer)
+        {
+            if (string.IsNullOrWhiteSpace(CustomerName))
+            {
+                validationMessages.Add("Tên khách hàng không được để trống.");
+            }
+
+            if (string.IsNullOrWhiteSpace(Telephone))
+            {
+                validationMessages.Add("Số điện thoại không được để trống.");
+            }
+
+            if (string.IsNullOrWhiteSpace(Email))
+            {
+                validationMessages.Add("Email không được để trống.");
+            }
+            else if (!IsValidEmail(Email))
+            {
+                validationMessages.Add("Email không hợp lệ.");
+            }
+
+            if (CustomerBirthday == null)
+            {
+                validationMessages.Add("Ngày sinh khách hàng không được để trống.");
+            }
+
+            if (CustomerStatus == null)
+            {
+                validationMessages.Add("Trạng thái khách hàng không được để trống.");
+            }
+
+            if (string.IsNullOrWhiteSpace(Password))
+            {
+                validationMessages.Add("Mật khẩu không được để trống.");
+            }
+
+            return validationMessages;
+        }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KhoaBD.WPF"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="800">
+        Title="LoginWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock HorizontalAlignment="Center" Margin="0,64,0,0" TextWrapping="Wrap" Text="LOGIN PAGE" VerticalAlignment="Top" Width="112" FontWeight="Bold" FontSize="18"/>
         <TextBox x:Name="txtMail" HorizontalAlignment="Center" Margin="0,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" />

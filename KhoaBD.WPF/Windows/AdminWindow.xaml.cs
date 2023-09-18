@@ -40,6 +40,16 @@ namespace KhoaBD.WPF.Windows
             _customerService.GetAll().ToList().ForEach(x => customers.Add(x));
         }
 
+        public void ReloadCustomer()
+        {
+            if (customers.Any())
+            {
+                customers = new ObservableCollection<Customer>();
+            }
+            _customerService.GetAll().ToList().ForEach(x => customers.Add(x));
+            customerDataGrid.ItemsSource = customers;
+        }
+
         private void EditCustomerButton_Click(object sender, RoutedEventArgs e)
         {
             var customer = customerDataGrid.SelectedItem as Customer;
@@ -50,6 +60,11 @@ namespace KhoaBD.WPF.Windows
             {
                 var updateResult = _customerService.Update(customer);
             }
+        }
+
+        private void LoadCustomerButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReloadCustomer();
         }
     }
 }
