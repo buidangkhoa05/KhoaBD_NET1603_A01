@@ -11,6 +11,10 @@ namespace PRN221.Application.Service.Implement
     public class CustomerService : ICustomerService
     {
         private readonly IGenericRepository<Customer> _customerRepository;
+        private CustomerValidator _customerValidator;
+
+        private CustomerValidator CustomerValidator => (_customerValidator ??= new CustomerValidator());
+
         public CustomerService(IGenericRepository<Customer> customerRepository)
         {
             _customerRepository = customerRepository;
@@ -31,53 +35,64 @@ namespace PRN221.Application.Service.Implement
             });
         }
 
-        public int Update(Customer customer)
+        public (bool, string) Update(Customer customer)
         {
-            return _customerRepository.Update(c => c.Email == customer.Email,
-               setter => setter.SetProperty(c => c.CustomerBirthday, customer.CustomerBirthday)
-                                 .SetProperty(c => c.CustomerName, customer.CustomerName)
-                                 .SetProperty(c => c.CustomerStatus, customer.CustomerStatus)
-                                 .SetProperty(c => c.Password, customer.Password)
-                                 .SetProperty(c => c.Telephone, customer.Telephone));
+            var (isValid, message) = Validate4Update(customer);
+            if (isValid)
+            {
+                try
+                {
+                    var resultUpdate = _customerRepository.Update(c => c.Email == customer.Email,
+                        setter => setter.SetProperty(c => c.CustomerBirthday, customer.CustomerBirthday)
+                                .SetProperty(c => c.CustomerName, customer.CustomerName)
+                                .SetProperty(c => c.CustomerStatus, customer.CustomerStatus)
+                                .SetProperty(c => c.Password, customer.Password)
+                                .SetProperty(c => c.Telephone, customer.Telephone));
+
+                    return (true, string.Empty);
+                }
+                catch (Exception)
+                {
+                    return (false, "Update have error");
+
+                }
+            }
+            else
+            {
+                return (false, message);
+            }
+
         }
 
-        public (bool, string) UpdateValidate(Customer customer)
+        public (bool, string) Validate4Update(Customer customer)
         {
-            if (string.IsNullOrWhiteSpace(CustomerName))
+            if (customer.Email == AppConfig.Admin.Email || HasMailAddressExist(customer))
             {
-                validationMessages.Add("Tên khách hàng không được để trống.");
+                return (false, "Email is invalid.");
             }
 
-            if (string.IsNullOrWhiteSpace(Telephone))
-            {
-                validationMessages.Add("Số điện thoại không được để trống.");
-            }
+            var result = CustomerValidator.Validate(customer);
 
-            if (string.IsNullOrWhiteSpace(Email))
+            if (result.IsValid)
             {
-                validationMessages.Add("Email không được để trống.");
+                return (true, "Validation succeeded.");
             }
-            else if (!IsValidEmail(Email))
+            else
             {
-                validationMessages.Add("Email không hợp lệ.");
+                // Gather error messages into a single string
+                var errorMessage = string.Join("\n", result.Errors.Select(error => error.ErrorMessage));
+                return (false, errorMessage);
             }
+        }
 
-            if (CustomerBirthday == null)
+        public bool HasMailAddressExist(Customer customer)
+        {
+            return _customerRepository.GetWithCondition(c => new Customer
             {
-                validationMessages.Add("Ngày sinh khách hàng không được để trống.");
-            }
-
-            if (CustomerStatus == null)
-            {
-                validationMessages.Add("Trạng thái khách hàng không được để trống.");
-            }
-
-            if (string.IsNullOrWhiteSpace(Password))
-            {
-                validationMessages.Add("Mật khẩu không được để trống.");
-            }
-
-            return validationMessages;
+                CustomerId = c.CustomerId
+            },
+                     c => c.CustomerId != customer.CustomerId
+                         && c.Email == customer.Email).Any();
         }
     }
 }

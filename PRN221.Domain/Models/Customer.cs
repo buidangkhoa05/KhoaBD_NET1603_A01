@@ -32,15 +32,15 @@ public class CustomerValidator : AbstractValidator<Customer>
 
         RuleFor(customer => customer.CustomerName)
             .NotEmpty().WithMessage("Customer name is required.")
-            .Length(0, 25).WithMessage("Customer name cannot exceed 50 characters.");
+            .Length(0, 50).WithMessage("Customer name cannot exceed 50 characters.");
 
         RuleFor(customer => customer.Telephone)
             .NotEmpty().WithMessage("Telephone is required.")
-            .Length(0, 6).WithMessage("Telephone cannot exceed 20 characters.");
+            .Length(0, 12).WithMessage("Telephone cannot exceed 12 characters.");
 
         RuleFor(customer => customer.Email)
             .NotEmpty().WithMessage("Email is required.")
-            .Length(0, 25).WithMessage("Email cannot exceed 25 characters.")
+            .Length(0, 50).WithMessage("Email cannot exceed 50 characters.")
             .EmailAddress().WithMessage("Invalid email format.");
 
         RuleFor(customer => customer.CustomerBirthday)
@@ -48,8 +48,8 @@ public class CustomerValidator : AbstractValidator<Customer>
 
         RuleFor(customer => customer.Password)
             .NotEmpty().WithMessage("Password is required.")
-            .MinimumLength(6).WithMessage("Password must be at least 6 characters long.")
-            .Length(0, 25).WithMessage("Email cannot exceed 25 characters.");
+            .MinimumLength(5).WithMessage("Password must be at least 5 characters long.")
+            .Length(0, 50).WithMessage("Email cannot exceed 50 characters.");
     }
 
 

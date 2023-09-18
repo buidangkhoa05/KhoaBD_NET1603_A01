@@ -54,11 +54,21 @@ namespace KhoaBD.WPF.Windows
         {
             var customer = customerDataGrid.SelectedItem as Customer;
 
-            var confirmResult = MessageBox.Show("Bạn có muốn update không ?", null, MessageBoxButton.YesNo);
+            var confirmResult = WindowsExtesions.ConfirmMessageBox("Do you want update?");
 
             if (confirmResult == MessageBoxResult.Yes)
             {
-                var updateResult = _customerService.Update(customer);
+                var (result, message) = _customerService.Update(customer);
+
+                if (result)
+                {
+                    WindowsExtesions.SuccessMessageBox("Update successful");
+                    ReloadCustomer();
+                }
+                else
+                {
+                    WindowsExtesions.ErrorMessageBox(message);
+                }
             }
         }
 
