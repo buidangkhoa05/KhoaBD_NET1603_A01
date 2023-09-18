@@ -1,0 +1,14 @@
+﻿<Window x:Class="KhoaBD.WPF.Windows.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KhoaBD.WPF"
+        mc:Ignorable="d"
+        Title="AdminWindow" Height="450" Width="800">
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" Margin="0,64,0,0" TextWrapping="Wrap" Text="ADMIN PAGE" VerticalAlignment="Top" Width="119" FontWeight="Bold" FontSize="18"/>
+
+
+    </Grid>
+</Window>

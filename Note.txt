@@ -1,0 +1,10 @@
+ 
+ Scaffold command 
+ 
+ Scaffold-DbContext 'Server=localhost,1433;Database=MyStore;User Id=sa;Password=12345;Trusted_Connection=True;TrustServerCertificate=True;' Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+
+ Libary:
+  Microsoft.Extensions.Configuration
+  Microsoft.Extensions.Configuration.FileExtensions
+  Microsoft.Extensions.Configuration.Json

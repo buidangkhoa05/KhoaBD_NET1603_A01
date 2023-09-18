@@ -1,0 +1,20 @@
+﻿<Window x:Class="KhoaBD.WPF.Windows.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KhoaBD.WPF"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="450" Width="800">
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" Margin="0,64,0,0" TextWrapping="Wrap" Text="LOGIN PAGE" VerticalAlignment="Top" Width="112" FontWeight="Bold" FontSize="18"/>
+        <TextBox x:Name="txtMail" HorizontalAlignment="Center" Margin="0,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" />
+        <Label Content="Mail:" HorizontalAlignment="Left" Margin="231,156,0,0" VerticalAlignment="Top" Height="29" Width="53"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="231,211,0,0" VerticalAlignment="Top" Height="29" Width="72"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Width="184"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="336,284,0,0" VerticalAlignment="Top" Width="99" RenderTransformOrigin="0.194,0.461" Click="Button_Click"/>
+
+
+    </Grid>
+    
+</Window>
