@@ -38,6 +38,7 @@ namespace KhoaBD.WPF
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             services.AddTransient(typeof(IAuthenService), typeof(AuthenServivce));
+            services.AddTransient(typeof(ICustomerService), typeof(CustomerService));
         }
 
         protected override void OnStartup(StartupEventArgs e)
