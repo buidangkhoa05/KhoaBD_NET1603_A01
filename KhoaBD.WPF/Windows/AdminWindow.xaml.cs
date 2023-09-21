@@ -159,7 +159,8 @@ namespace KhoaBD.WPF.Windows
 
         private void CreateCarButton_Click(object sender, RoutedEventArgs e)
         {
-           _manipulateCarWindow = _serviceProvider.GetRequiredService<ManipulateCarWindow>();
+            _manipulateCarWindow = _serviceProvider.GetRequiredService<ManipulateCarWindow>();
+            _manipulateCarWindow.LoadData4Create();
             var isCreateSucces = _manipulateCarWindow.ShowDialog() ?? false;
 
             if (isCreateSucces)

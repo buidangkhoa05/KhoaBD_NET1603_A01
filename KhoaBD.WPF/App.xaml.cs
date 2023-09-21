@@ -43,6 +43,8 @@ namespace KhoaBD.WPF
             services.AddTransient(typeof(IAuthenService), typeof(AuthenServivce));
             services.AddTransient(typeof(ICustomerService), typeof(CustomerService));
             services.AddTransient(typeof(ICarInformationService), typeof(CarInformationService));
+            services.AddTransient(typeof(IManufacturerService), typeof(ManufacturerService));
+            services.AddTransient(typeof(ISupplierService), typeof(SupplierService));
         }
 
         protected override void OnStartup(StartupEventArgs e)

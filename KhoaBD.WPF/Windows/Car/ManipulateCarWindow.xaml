@@ -8,24 +8,30 @@
         Title="ManipulateCarWindow" Height="800" Width="800">
     <Grid>
         <TextBlock x:Name="tbActionName" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="37" Width="124" TextAlignment="Center"/>
-        <Button x:Name="btnAction" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="152,622,0,0" Click="btnAction_Click"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="554,622,0,0" Click="CancelButton_Click"/>
+        <Button x:Name="btnAction" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="126,657,0,0" Click="btnAction_Click"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="625,657,0,0" Click="CancelButton_Click"/>
 
         <Label Content="CarName:" HorizontalAlignment="Left" Margin="27,46,0,0" VerticalAlignment="Top" Width="76"/>
-        <Label Content="CarDescription:" HorizontalAlignment="Left" Margin="27,92,0,0" VerticalAlignment="Top" Width="92"/>
-        <Label Content="NumberOfDoors:" HorizontalAlignment="Left" Margin="22,139,0,0" VerticalAlignment="Top" Width="101"/>
-        <Label Content="SeatingCapacity:" HorizontalAlignment="Left" Margin="18,188,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label Content="CarDescription:" HorizontalAlignment="Left" Margin="433,46,0,0" VerticalAlignment="Top" Width="92"/>
+        <Label Content="NumberOfDoors:" HorizontalAlignment="Left" Margin="22,139,0,0" VerticalAlignment="Top" Width="101" RenderTransformOrigin="0.228,-0.33"/>
+        <Label Content="SeatingCapacity:" HorizontalAlignment="Left" Margin="433,139,0,0" VerticalAlignment="Top" Width="101"/>
         <Label Content="FuelType:" HorizontalAlignment="Left" Margin="18,240,0,0" VerticalAlignment="Top" Width="102"/>
-        <Label Content="Year" HorizontalAlignment="Left" Margin="27,414,0,0" VerticalAlignment="Top" Width="101"/>
-        <Label Content="CarStatus" HorizontalAlignment="Left" Margin="18,299,0,0" VerticalAlignment="Top" Width="101"/>
-        <Label Content="CarRentingPriceDay:" HorizontalAlignment="Left" Margin="18,363,0,0" VerticalAlignment="Top" Width="122"/>
-        <Label Content="Manufacturer" HorizontalAlignment="Left" Margin="22,467,0,0" VerticalAlignment="Top" Width="122"/>
-        <Label Content="Supplier" HorizontalAlignment="Left" Margin="27,521,0,0" VerticalAlignment="Top" Width="122"/>
-        <ComboBox x:Name="cbSupplier" Margin="170,521,170,137" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged">
-            <ComboBoxItem>Option 1</ComboBoxItem>
-            <ComboBoxItem>Option 2</ComboBoxItem>
-            <ComboBoxItem>Option 3</ComboBoxItem>
-            <ComboBoxItem>Option 4</ComboBoxItem>
+        <Label Content="Year" HorizontalAlignment="Left" Margin="433,322,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label Content="CarStatus" HorizontalAlignment="Left" Margin="433,240,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label Content="CarRentingPriceDay:" HorizontalAlignment="Left" Margin="18,322,0,0" VerticalAlignment="Top" Width="122"/>
+        <Label Content="Manufacturer" HorizontalAlignment="Left" Margin="18,405,0,0" VerticalAlignment="Top" Width="122"/>
+        <Label Content="Supplier" HorizontalAlignment="Left" Margin="22,507,0,0" VerticalAlignment="Top" Width="122" RenderTransformOrigin="0.531,2.763"/>
+        <ComboBox x:Name="cbManufacturer" Margin="271,415,69,329" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBoxItem>Manufacturer 1</ComboBoxItem>
+            <ComboBoxItem>Manufacturer 2</ComboBoxItem>
+            <ComboBoxItem>Manufacturer 3</ComboBoxItem>
+            <ComboBoxItem>Manufacturer 4</ComboBoxItem>
+        </ComboBox>
+        <ComboBox x:Name="cbSupplier" Margin="271,517,61,227" SelectedIndex="0">
+            <ComboBoxItem Content="Supplier 1"/>
+            <ComboBoxItem Content="Supplier 2"/>
+            <ComboBoxItem Content="Supplier 3"/>
+            <ComboBoxItem Content="Supplier 4"/>
         </ComboBox>
 
 
