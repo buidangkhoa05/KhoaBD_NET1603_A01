@@ -9,5 +9,8 @@ namespace PRN221.Application.Service.Interface
     public interface ICarInformationService
     {
         IEnumerable<CarInformation> GetAll();
+        (bool, string) Create(CarInformation car);
+        (bool, string) Delete(int carId);
+        (bool, string) Update(CarInformation car);
     }
 }

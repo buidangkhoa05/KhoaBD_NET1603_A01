@@ -23,7 +23,7 @@ namespace PRN221.Application.Service.Implement
                 ManufacturerCountry = m.ManufacturerCountry,
                 Description = m.Description,
                 ManufacturerId = m.ManufacturerId,
-                ManufacturerName = m.ManufacturerName,
+                ManufacturerName = m.ManufacturerName, 
             });
         }
     }

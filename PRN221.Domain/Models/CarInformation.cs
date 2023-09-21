@@ -40,10 +40,11 @@ public class CarInformationValidator : AbstractValidator<CarInformation>
     public CarInformationValidator()
     {
         RuleFor(x => x.CarId)
-    .GreaterThanOrEqualTo(-1).WithMessage("Mã xe phải lớn hơn hoặc bằng -1.");
+        .GreaterThanOrEqualTo(-1).WithMessage("Mã xe phải lớn hơn hoặc bằng -1.");
 
         RuleFor(x => x.CarName)
-            .Length(0, 25).WithMessage("Tên xe không được quá 25 ký tự.");
+            .Length(0, 25).WithMessage("Tên xe không được quá 25 ký tự.")
+            .NotEmpty().WithMessage("Tên xe phải có");
 
         RuleFor(x => x.CarDescription)
             .Length(0, 110).WithMessage("Mô tả xe không được quá 110 ký tự.");
@@ -55,10 +56,11 @@ public class CarInformationValidator : AbstractValidator<CarInformation>
             .NotEmpty().WithMessage("Số chỗ ngồi không được để trống.");
 
         RuleFor(x => x.FuelType)
-            .Length(0, 10).WithMessage("Loại nhiên liệu không được quá 10 ký tự.");
+            .Length(0, 10).WithMessage("Loại nhiên liệu không được quá 10 ký tự.")
+            .NotNull().NotEmpty().WithMessage("Loại nhiên liệu phải có");
 
         RuleFor(x => x.Year)
-            .NotEmpty().WithMessage("Năm sản xuất không được để trống.");
+            .NotNull().NotEmpty().WithMessage("Năm sản xuất không được để trống.");
 
         RuleFor(x => x.ManufacturerId)
             .GreaterThanOrEqualTo(-1).WithMessage("Mã nhà sản xuất phải lớn hơn hoặc bằng -1.");

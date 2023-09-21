@@ -168,5 +168,39 @@ namespace KhoaBD.WPF.Windows
                 ReloadCar();
             }
         }
+
+        private void DeleteCarButton_Click(object sender, RoutedEventArgs e)
+        {
+            var confirm = WindowsExtesions.ConfirmMessageBox("Do you want delete this car?");
+            if (confirm == MessageBoxResult.Yes)
+            {
+                var car = carDataGrid.SelectedItem as CarInformation;
+                var (result, message) = _carService.Delete(car.CarId);
+
+                if (result)
+                {
+                    WindowsExtesions.SuccessMessageBox("Delete successful");
+                    ReloadCar();
+                }
+                else
+                {
+                    WindowsExtesions.ErrorMessageBox(message);
+
+                }
+            }
+        }
+
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            _manipulateCarWindow = _serviceProvider.GetRequiredService<ManipulateCarWindow>();
+            _manipulateCarWindow.Tag = carDataGrid.SelectedItem as CarInformation;
+            _manipulateCarWindow.LoadData4Update();
+            var isUpdateSucces = _manipulateCarWindow.ShowDialog() ?? false;
+
+            if (isUpdateSucces)
+            {
+                ReloadCar();
+            }
+        }
     }
 }

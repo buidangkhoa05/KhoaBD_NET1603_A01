@@ -16,23 +16,23 @@
         <Label Content="NumberOfDoors:" HorizontalAlignment="Left" Margin="22,139,0,0" VerticalAlignment="Top" Width="101" RenderTransformOrigin="0.228,-0.33"/>
         <Label Content="SeatingCapacity:" HorizontalAlignment="Left" Margin="433,139,0,0" VerticalAlignment="Top" Width="101"/>
         <Label Content="FuelType:" HorizontalAlignment="Left" Margin="18,240,0,0" VerticalAlignment="Top" Width="102"/>
-        <Label Content="Year" HorizontalAlignment="Left" Margin="433,322,0,0" VerticalAlignment="Top" Width="101"/>
+        <Label Content="Year" HorizontalAlignment="Left" Margin="433,322,0,0" VerticalAlignment="Top" Width="92"/>
         <Label Content="CarStatus" HorizontalAlignment="Left" Margin="433,240,0,0" VerticalAlignment="Top" Width="101"/>
-        <Label Content="CarRentingPriceDay:" HorizontalAlignment="Left" Margin="18,322,0,0" VerticalAlignment="Top" Width="122"/>
+        <Label Content="CarRentingPricePerDay:" HorizontalAlignment="Left" Margin="18,322,0,0" VerticalAlignment="Top" Width="146"/>
         <Label Content="Manufacturer" HorizontalAlignment="Left" Margin="18,405,0,0" VerticalAlignment="Top" Width="122"/>
         <Label Content="Supplier" HorizontalAlignment="Left" Margin="22,507,0,0" VerticalAlignment="Top" Width="122" RenderTransformOrigin="0.531,2.763"/>
         <ComboBox x:Name="cbManufacturer" Margin="271,415,69,329" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged">
-            <ComboBoxItem>Manufacturer 1</ComboBoxItem>
-            <ComboBoxItem>Manufacturer 2</ComboBoxItem>
-            <ComboBoxItem>Manufacturer 3</ComboBoxItem>
-            <ComboBoxItem>Manufacturer 4</ComboBoxItem>
         </ComboBox>
         <ComboBox x:Name="cbSupplier" Margin="271,517,61,227" SelectedIndex="0">
-            <ComboBoxItem Content="Supplier 1"/>
-            <ComboBoxItem Content="Supplier 2"/>
-            <ComboBoxItem Content="Supplier 3"/>
-            <ComboBoxItem Content="Supplier 4"/>
         </ComboBox>
+        <TextBox x:Name="tbFuelType" HorizontalAlignment="Left" Margin="164,242,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="199" Height="21"/>
+        <TextBox x:Name="tbCarStatus" HorizontalAlignment="Left" Margin="539,245,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="199" Height="21"/>
+        <TextBox x:Name="tbYear" HorizontalAlignment="Left" Margin="539,322,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="199" Height="22"/>
+        <TextBox x:Name="tbSeatingCapacity" HorizontalAlignment="Left" Margin="539,141,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="199" Height="21"/>
+        <TextBox x:Name="tbNumerDoor" HorizontalAlignment="Left" Margin="164,145,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="199" Height="20"/>
+        <TextBox x:Name="tbCarName" HorizontalAlignment="Left" Margin="164,52,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="199" Height="20"/>
+        <TextBox x:Name="tbCarDescription" HorizontalAlignment="Left" Margin="540,52,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="199" Height="20"/>
+        <TextBox x:Name="tbCarRentingPricePerDay" HorizontalAlignment="Left" Margin="182,327,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="199" Height="21"/>
 
 
     </Grid>

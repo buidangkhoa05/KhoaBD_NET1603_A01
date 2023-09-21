@@ -91,8 +91,8 @@
                             <!-- Add your buttons or other controls for managing customer information -->
                             <Button Content="Create Car" Width="100" Height="30" Margin="5" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Click="CreateCarButton_Click"/>
                             <Button Content="Load Car" Width="100" Height="30" Margin="5"  Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Click="LoadCarButton_Click"/>
-                            <Button Content="Update Car" Width="100" Height="30" Margin="5" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
-                            <Button Content="Delete Car" Width="100" Height="30" Margin="0,47,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="3" />
+                            <Button Content="Update Car" Width="100" Height="30" Margin="5" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Click="UpdateButton_Click"/>
+                            <Button Content="Delete Car" Width="100" Height="30" Margin="0,47,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="3" Click="DeleteCarButton_Click" />
                         </Grid>
                     </StackPanel>
                 </Grid>

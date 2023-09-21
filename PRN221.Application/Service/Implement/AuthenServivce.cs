@@ -78,10 +78,10 @@ namespace PRN221.Application.Service.Implement
 
         static bool IsValidEmail(string email)
         {
-            // Define a regular expression pattern for a simple email validation
+            // Define a regular expression patternYear for a simple email validation
             string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
 
-            // Use Regex.IsMatch to check if the email matches the pattern
+            // Use Regex.IsMatch to check if the email matches the patternYear
             return Regex.IsMatch(email, pattern);
         }
     }
