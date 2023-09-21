@@ -8,6 +8,8 @@ global using System;
 global using KhoaBD.WPF.Windows;
 
 global using PRN221.Application;
+global using PRN221.Application.Service.Interface;
+global using PRN221.Application.Service.Implement;
 global using PRN221.Application.Repository.Implement;
 global using PRN221.Application.Repository.Interface;
 

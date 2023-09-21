@@ -35,6 +35,44 @@ namespace PRN221.Application.Service.Implement
             });
         }
 
+        public (bool, string) Create(Customer customer)
+        {
+            var (isValid, message) = Validate4Update(customer);
+            if (isValid)
+            {
+                try
+                {
+                    _customerRepository.Create(customer);
+                    var result = _customerRepository.SaveChanges();
+
+                    return (true, string.Empty);
+                }
+                catch (Exception)
+                {
+                    return (false, "Create have error");
+
+                }
+            }
+            else
+            {
+                return (false, message);
+            }
+        }
+
+        public (bool, string) Delete(int customerId)
+        {
+            try
+            {
+                var resutl = _customerRepository.Delete(c => c.CustomerId == customerId);
+                return (true, string.Empty);
+            }
+            catch (Exception)
+            {
+                return (false, "Delete have error");
+
+            }
+        }
+
         public (bool, string) Update(Customer customer)
         {
             var (isValid, message) = Validate4Update(customer);

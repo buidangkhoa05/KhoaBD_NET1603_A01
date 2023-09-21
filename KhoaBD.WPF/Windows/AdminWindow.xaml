@@ -5,22 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KhoaBD.WPF"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="AdminWindow" Height="450" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid>
         <TabControl>
             <TabItem Header="Customer">
                 <Grid>
-                    <StackPanel>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="17*"/>
+                        <ColumnDefinition Width="480*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.ColumnSpan="2">
                         <TextBlock FontWeight="Bold" FontSize="16" Margin="10">Manage Customer Information</TextBlock>
                         <DataGrid x:Name="customerDataGrid" SelectionMode="Single" AutoGenerateColumns="false" ItemsSource="{Binding}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Customer ID" Binding="{Binding CustomerId}" IsReadOnly="True" />
-                                <DataGridTextColumn Header="Customer Name" Binding="{Binding CustomerName}" />
-                                <DataGridTextColumn Header="Telephone" Binding="{Binding Telephone}" />
-                                <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
-                                <DataGridTextColumn Header="Birthday" Binding="{Binding CustomerBirthday}" />
-                                <DataGridTextColumn Header="Status" Binding="{Binding CustomerStatus}" />
-                                <DataGridTextColumn Header="Password" Binding="{Binding Password}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Customer Name" Binding="{Binding CustomerName}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Telephone" Binding="{Binding Telephone}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Email" Binding="{Binding Email}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Birthday" Binding="{Binding CustomerBirthday}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Status" Binding="{Binding CustomerStatus}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Password" Binding="{Binding Password}" />
                             </DataGrid.Columns>
                         </DataGrid>
                         <Grid Height="121" RenderTransformOrigin="0.5,0.5">
@@ -40,25 +44,56 @@
                             </Grid.RenderTransform>
                             <!-- Add more buttons or controls as needed -->
                             <!-- Add your buttons or other controls for managing customer information -->
-                            <Button Content="Create Customer" Width="100" Height="30" Margin="5" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                            <Button Content="Create Customer" Width="100" Height="30" Margin="5" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Click="CreateCustomerButton_Click"/>
                             <Button Content="Load Customer" Width="100" Height="30" Margin="5"  Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Click="LoadCustomerButton_Click"/>
                             <Button Content="Update Customer" Width="100" Height="30" Margin="5" Click="EditCustomerButton_Click" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
-                            <Button Content="Delete Customer" Width="100" Height="30" Margin="0,47,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="3" />
+                            <Button Content="Delete Customer" Width="100" Height="30" Margin="0,47,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="3" Click="DeleteCustomerButton_Click" />
                         </Grid>
                     </StackPanel>
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Car">
+            <TabItem Header="Car" Height="20" VerticalAlignment="Top">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="27*"/>
-                        <ColumnDefinition Width="767*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.ColumnSpan="2">
-                        <!-- Display a message or content for regular users -->
-                        <TextBlock FontWeight="Bold" FontSize="16" Margin="10">Regular Users Don't Have Access</TextBlock>
-                        <TextBlock Margin="10">Please contact the admin for customer management.</TextBlock>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" FontSize="16" Margin="10">Manage Car Information</TextBlock>
+                        <DataGrid x:Name="carDataGrid" SelectionMode="Single" AutoGenerateColumns="false" ItemsSource="{Binding}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn IsReadOnly="True" Header="CarId ID" Binding="{Binding CarId}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="CarName" Binding="{Binding CarName}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="CarDescription" Binding="{Binding CarDescription}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="NumberOfDoors" Binding="{Binding NumberOfDoors}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="SeatingCapacity" Binding="{Binding SeatingCapacity}"/>
+                                <DataGridTextColumn IsReadOnly="True" Header="FuelType" Binding="{Binding FuelType}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Year" Binding="{Binding Year}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="CarStatus" Binding="{Binding CarStatus}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="CarRentingPricePerDay" Binding="{Binding CarRentingPricePerDay}"/>
+                                <DataGridTextColumn IsReadOnly="True" Header="Manufacturer" Binding="{Binding Manufacturer.ManufacturerName}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Supplier" Binding="{Binding Supplier.SupplierName}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Grid Height="121" RenderTransformOrigin="0.5,0.5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-0.076"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+                            <!-- Add more buttons or controls as needed -->
+                            <!-- Add your buttons or other controls for managing customer information -->
+                            <Button Content="Create Car" Width="100" Height="30" Margin="5" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Click="CreateCarButton_Click"/>
+                            <Button Content="Load Car" Width="100" Height="30" Margin="5"  Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Click="LoadCarButton_Click"/>
+                            <Button Content="Update Car" Width="100" Height="30" Margin="5" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
+                            <Button Content="Delete Car" Width="100" Height="30" Margin="0,47,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="3" />
+                        </Grid>
                     </StackPanel>
                 </Grid>
             </TabItem>

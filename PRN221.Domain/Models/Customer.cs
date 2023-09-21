@@ -27,8 +27,8 @@ public class CustomerValidator : AbstractValidator<Customer>
 {
     public CustomerValidator()
     {
-        RuleFor(customer => customer.CustomerId)
-            .GreaterThan(0).WithMessage("Customer ID must be greater than zero.");
+        //RuleFor(customer => customer.CustomerId)
+        //    .GreaterThan(0).WithMessage("Customer ID must be greater than zero.");
 
         RuleFor(customer => customer.CustomerName)
             .NotEmpty().WithMessage("Customer name is required.")
@@ -36,6 +36,7 @@ public class CustomerValidator : AbstractValidator<Customer>
 
         RuleFor(customer => customer.Telephone)
             .NotEmpty().WithMessage("Telephone is required.")
+            .MinimumLength(10).WithMessage("Telephone number is invalid length")
             .Length(0, 12).WithMessage("Telephone cannot exceed 12 characters.");
 
         RuleFor(customer => customer.Email)
@@ -50,11 +51,20 @@ public class CustomerValidator : AbstractValidator<Customer>
             .NotEmpty().WithMessage("Password is required.")
             .MinimumLength(5).WithMessage("Password must be at least 5 characters long.")
             .Length(0, 50).WithMessage("Email cannot exceed 50 characters.");
+
+        RuleFor(customer => customer.CustomerStatus)
+            .Must(BeValidStatus)
+            .WithMessage("Please enter a valid customer status (0-255).");
     }
 
 
     private bool BeAValidDate(DateTime? date)
     {
         return date.HasValue && date.Value.Year >= 1900 && date.Value.Year <= DateTime.Now.Year;
+    }
+
+    private bool BeValidStatus(byte? status)
+    {
+        return status >= 0 && status <= 255;
     }
 }

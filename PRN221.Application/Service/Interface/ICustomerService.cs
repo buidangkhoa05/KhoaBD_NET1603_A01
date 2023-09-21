@@ -10,5 +10,7 @@ namespace PRN221.Application.Service.Interface
     {
         IEnumerable<Customer> GetAll();
         (bool, string) Update(Customer customer);
+        (bool, string) Create(Customer customer);
+        (bool, string) Delete(int customerId);
     }
 }

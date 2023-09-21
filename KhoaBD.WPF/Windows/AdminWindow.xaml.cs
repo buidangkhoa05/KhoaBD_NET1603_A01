@@ -1,6 +1,6 @@
-﻿using PRN221.Application.Service.Implement;
-using PRN221.Application.Service.Interface;
-using PRN221.Domain.Models;
+﻿
+using KhoaBD.WPF.Windows.Car;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,17 +23,31 @@ namespace KhoaBD.WPF.Windows
     /// </summary>
     public partial class AdminWindow : Window
     {
+        private readonly IServiceProvider _serviceProvider;
         private ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
+        private ObservableCollection<CarInformation> cars = new ObservableCollection<CarInformation>();
 
         private readonly ICustomerService _customerService;
+        private readonly ICarInformationService _carService;
+        private ManipulateCustomer _manipulateCustomerWindow;
+        private ManipulateCarWindow _manipulateCarWindow;
 
-        public AdminWindow(ICustomerService customerService)
+        public AdminWindow(IServiceProvider serviceProvider,
+            ICustomerService customerService,
+            ICarInformationService carService
+        )
         {
             InitializeComponent();
+
             _customerService = customerService;
+            _serviceProvider = serviceProvider;
+            _carService = carService;
+
             LoadCustomer();
+            LoadCar();
         }
 
+        #region Load Customer
         public void LoadCustomer()
         {
             customerDataGrid.ItemsSource = customers;
@@ -52,29 +66,106 @@ namespace KhoaBD.WPF.Windows
 
         private void EditCustomerButton_Click(object sender, RoutedEventArgs e)
         {
+            _manipulateCustomerWindow = _serviceProvider.GetRequiredService<ManipulateCustomer>();
+
             var customer = customerDataGrid.SelectedItem as Customer;
 
-            var confirmResult = WindowsExtesions.ConfirmMessageBox("Do you want update?");
-
-            if (confirmResult == MessageBoxResult.Yes)
+            if (customer == null)
             {
-                var (result, message) = _customerService.Update(customer);
-
-                if (result)
-                {
-                    WindowsExtesions.SuccessMessageBox("Update successful");
-                    ReloadCustomer();
-                }
-                else
-                {
-                    WindowsExtesions.ErrorMessageBox(message);
-                }
+                WindowsExtesions.ErrorMessageBox("Please select a customer");
+                return;
             }
+
+            _manipulateCustomerWindow.Tag = customer;
+
+            _manipulateCustomerWindow.LoadData4Update();
+            var isUpdateSuccess = _manipulateCustomerWindow.ShowDialog() ?? false;
+
+            if (isUpdateSuccess)
+            {
+                ReloadCustomer();
+            }
+
+            _manipulateCustomerWindow = null;
         }
 
         private void LoadCustomerButton_Click(object sender, RoutedEventArgs e)
         {
             ReloadCustomer();
+        }
+
+        private void CreateCustomerButton_Click(object sender, RoutedEventArgs e)
+        {
+            _manipulateCustomerWindow = _serviceProvider.GetRequiredService<ManipulateCustomer>();
+            _manipulateCustomerWindow.LoadData4Create();
+            var isCreateSucces = _manipulateCustomerWindow.ShowDialog() ?? false;
+
+            if (isCreateSucces)
+            {
+                ReloadCustomer();
+            }
+            _manipulateCustomerWindow = null;
+        }
+
+        private void DeleteCustomerButton_Click(object sender, RoutedEventArgs e)
+        {
+            var customer = customerDataGrid.SelectedItem as Customer;
+
+            if (customer != null)
+            {
+                var confirmResult = WindowsExtesions.ConfirmMessageBox($"Do you want delete Customer:{customer.CustomerId} ?");
+
+                if (confirmResult == MessageBoxResult.Yes)
+                {
+                    var (result, message) = _customerService.Delete(customer.CustomerId);
+
+                    if (result)
+                    {
+                        WindowsExtesions.SuccessMessageBox("Delete successful");
+                        ReloadCustomer();
+                    }
+                    else
+                    {
+                        WindowsExtesions.ErrorMessageBox(message);
+                    }
+                }
+            }
+
+        }
+        #endregion Load Customer
+
+        #region Car Information 
+        void LoadCar()
+        {
+            carDataGrid.ItemsSource = cars;
+            _carService.GetAll().ToList().ForEach(x => cars.Add(x));
+        }
+
+        public void ReloadCar()
+        {
+            if (cars.Any())
+            {
+                cars = new ObservableCollection<CarInformation>();
+            }
+            _carService.GetAll().ToList().ForEach(x => cars.Add(x));
+            carDataGrid.ItemsSource = cars;
+        }
+        #endregion Car Information
+
+        private void LoadCarButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReloadCar();
+        }
+
+        private void CreateCarButton_Click(object sender, RoutedEventArgs e)
+        {
+           _manipulateCarWindow = _serviceProvider.GetRequiredService<ManipulateCarWindow>();
+            var isCreateSucces = _manipulateCarWindow.ShowDialog() ?? false;
+
+            if (isCreateSucces)
+            {
+                ReloadCar();
+            }
         }
     }
 }

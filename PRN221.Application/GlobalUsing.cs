@@ -8,6 +8,8 @@ global using Microsoft.EntityFrameworkCore;
 global using PRN221.Application.Repository.Interface;
 global using PRN221.Application.Common;
 
+global using PRN221.Application.Service.Interface;
+
 //global using PRN221.Domain.Entity;
 global using PRN221.Domain.Common;
 global using PRN221.Domain.Models;

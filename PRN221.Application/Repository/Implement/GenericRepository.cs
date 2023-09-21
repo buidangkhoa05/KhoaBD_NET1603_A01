@@ -43,9 +43,11 @@ namespace PRN221.Application.Repository.Implement
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public int Delete(Func<T, bool> filter)
+        public int Delete(Expression<Func<T, bool>> filter)
         {
-            return dbSet.Where(filter).AsQueryable().ExecuteDelete();
+            var query = dbSet.AsQueryable();
+            query = query.Where(filter);
+            return query.ExecuteDelete();
         }
         /// <summary>
         /// Update IsDeleted to true by condition filter without SaveChanges action
@@ -150,7 +152,7 @@ namespace PRN221.Application.Repository.Implement
             }
             else
             {
-                return query.Select(selector).Includes(includes).ToList();
+                return query.Includes(includes).Select(selector).ToList();
             }
         }
 

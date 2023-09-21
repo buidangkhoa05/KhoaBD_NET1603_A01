@@ -52,13 +52,13 @@ namespace KhoaBD.WPF.Windows
                 }
                 else
                 {
-                    _adminWindow.Show();
+                    _customerWindow.Show();
                     this.Close();
                 }
             }
             else
             {
-                MessageBox.Show(message);
+                WindowsExtesions.ErrorMessageBox(message);
             }
         }
 
