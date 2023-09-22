@@ -36,7 +36,7 @@ namespace PRN221.Application.Service.Implement
                 Supplier = car.Supplier,
                 Year = car.Year,
                 Manufacturer = car.Manufacturer,
-            },
+            },true,
             null,
             car => car.Manufacturer,
             car => car.Supplier);

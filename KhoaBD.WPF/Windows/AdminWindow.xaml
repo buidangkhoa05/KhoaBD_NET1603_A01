@@ -55,7 +55,11 @@
 
             <TabItem Header="Car" Height="20" VerticalAlignment="Top">
                 <Grid>
-                    <StackPanel>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="21*"/>
+                        <ColumnDefinition Width="121*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.ColumnSpan="2">
                         <TextBlock FontWeight="Bold" FontSize="16" Margin="10">Manage Car Information</TextBlock>
                         <DataGrid x:Name="carDataGrid" SelectionMode="Single" AutoGenerateColumns="false" ItemsSource="{Binding}">
                             <DataGrid.Columns>
@@ -105,8 +109,36 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.ColumnSpan="2">
                         <!-- Display a message or content for regular users -->
-                        <TextBlock FontWeight="Bold" FontSize="16" Margin="10">Regular Users Don't Have Access</TextBlock>
-                        <TextBlock Margin="10">Please contact the admin for customer management.</TextBlock>
+                        <TextBlock FontWeight="Bold" FontSize="16" Margin="10">Renting Transaction</TextBlock>
+                        <DataGrid x:Name="rentingDataGrid" SelectionMode="Single" AutoGenerateColumns="false" ItemsSource="{Binding}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn IsReadOnly="True" Header="RentingTransationId" Binding="{Binding RentingTransationId}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="RentingDate" Binding="{Binding RentingDate}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="TotalPrice" Binding="{Binding TotalPrice}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="CustomerId" Binding="{Binding CustomerId}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="RentingStatus" Binding="{Binding RentingStatus}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Grid Height="121" RenderTransformOrigin="0.5,0.5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-0.076"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+                            <!-- Add more buttons or controls as needed -->
+                            <!-- Add your buttons or other controls for managing customer information -->
+                            <Button Content="View Detail" Width="100" Height="30" Margin="5"  Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Click="ViewDetailButton_Click"/>
+                            <Button Content="Delete" Width="100" Height="30" Margin="0,47,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="3" Click="Button_Click" />
+                        </Grid>
                     </StackPanel>
                 </Grid>
             </TabItem>

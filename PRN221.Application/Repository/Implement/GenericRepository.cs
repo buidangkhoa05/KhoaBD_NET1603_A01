@@ -136,10 +136,15 @@ namespace PRN221.Application.Repository.Implement
         /// <param name="predicate"></param>
         /// <param name="includes"></param>
         /// <returns></returns>
-        public IEnumerable<T> GetWithCondition(Expression<Func<T, T>> selector, Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[]? includes)
+        public IEnumerable<T> GetWithCondition(Expression<Func<T, T>> selector, bool isTracking = true, Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[]? includes)
         {
             //Expression<Func<T, bool>> isNotDeleteCondition = p => p.IsDeleted == false;
             var query = dbSet.AsQueryable();
+
+            if (isTracking)
+            {
+                query = query.AsNoTracking();
+            }
 
             if (predicate != null)
             {

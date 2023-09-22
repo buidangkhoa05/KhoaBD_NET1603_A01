@@ -55,7 +55,7 @@ namespace PRN221.Application.Service.Implement
                             Email = x.Email,
                             CustomerBirthday = x.CustomerBirthday,
                             CustomerName = x.CustomerName,
-                        }, c => c.Email.Equals(mail) && c.Password.Equals(pass), null)
+                        },true, c => c.Email.Equals(mail) && c.Password.Equals(pass), null)
                      ).FirstOrDefault();
 
                     if (AppConfig.Customer == null && user != null)

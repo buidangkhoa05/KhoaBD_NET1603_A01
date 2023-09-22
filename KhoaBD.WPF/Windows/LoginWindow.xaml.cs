@@ -52,6 +52,8 @@ namespace KhoaBD.WPF.Windows
                 }
                 else
                 {
+                    _customerWindow.Tag = mail;
+                    _customerWindow.LoadCustomer();
                     _customerWindow.Show();
                     this.Close();
                 }

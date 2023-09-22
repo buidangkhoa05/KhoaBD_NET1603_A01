@@ -1,5 +1,6 @@
 ﻿
 using KhoaBD.WPF.Windows.Car;
+using KhoaBD.WPF.Windows.RentingTrans;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
@@ -26,15 +27,21 @@ namespace KhoaBD.WPF.Windows
         private readonly IServiceProvider _serviceProvider;
         private ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
         private ObservableCollection<CarInformation> cars = new ObservableCollection<CarInformation>();
+        private ObservableCollection<RentingTransaction> rentingTrans = new ObservableCollection<RentingTransaction>();
+
 
         private readonly ICustomerService _customerService;
         private readonly ICarInformationService _carService;
+        private readonly IRentinTransactionService _rentinTransactionService;
+
         private ManipulateCustomer _manipulateCustomerWindow;
         private ManipulateCarWindow _manipulateCarWindow;
+        private DetailTransactionWindow _detailTransactionWindow;
 
         public AdminWindow(IServiceProvider serviceProvider,
             ICustomerService customerService,
-            ICarInformationService carService
+            ICarInformationService carService,
+            IRentinTransactionService rentinTransactionService
         )
         {
             InitializeComponent();
@@ -42,12 +49,14 @@ namespace KhoaBD.WPF.Windows
             _customerService = customerService;
             _serviceProvider = serviceProvider;
             _carService = carService;
+            _rentinTransactionService = rentinTransactionService;
 
             LoadCustomer();
             LoadCar();
+            LoadRentTrans();
         }
 
-        #region Load Customer
+        #region  Customer
         public void LoadCustomer()
         {
             customerDataGrid.ItemsSource = customers;
@@ -132,7 +141,7 @@ namespace KhoaBD.WPF.Windows
             }
 
         }
-        #endregion Load Customer
+        #endregion  Customer
 
         #region Car Information 
         void LoadCar()
@@ -150,7 +159,6 @@ namespace KhoaBD.WPF.Windows
             _carService.GetAll().ToList().ForEach(x => cars.Add(x));
             carDataGrid.ItemsSource = cars;
         }
-        #endregion Car Information
 
         private void LoadCarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -200,6 +208,55 @@ namespace KhoaBD.WPF.Windows
             if (isUpdateSucces)
             {
                 ReloadCar();
+            }
+        }
+
+        #endregion Car Information
+
+        #region Renting Transaction
+        private void LoadRentTrans()
+        {
+            rentingDataGrid.ItemsSource = rentingTrans;
+            _rentinTransactionService.GetAll().ToList().ForEach(r => rentingTrans.Add(r));
+        }
+        public void ReloadRentTrans()
+        {
+            if (rentingTrans.Any())
+            {
+                rentingTrans = new ObservableCollection<RentingTransaction>();
+            }
+            _rentinTransactionService.GetAll().ToList().ForEach(r => rentingTrans.Add(r));
+            rentingDataGrid.ItemsSource = rentingTrans;
+        }
+        private void ViewDetailButton_Click(object sender, RoutedEventArgs e)
+        {
+            var rentingTrans = rentingDataGrid.SelectedItem as RentingTransaction;
+            if (rentingTrans == null)
+            {
+                WindowsExtesions.ErrorMessageBox("Vui lòng chọn giao dịch để xem chi tiết");
+                return;
+            }
+            _detailTransactionWindow = _serviceProvider.GetRequiredService<DetailTransactionWindow>();
+            _detailTransactionWindow.Tag = rentingTrans;
+            _detailTransactionWindow.LoadData();
+            var result = _detailTransactionWindow.ShowDialog();
+
+        }
+
+        #endregion Renting Transaction
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var rentingTrans = rentingDataGrid.SelectedItem as RentingTransaction;
+            var (result, message) = _rentinTransactionService.DeleteTrans(rentingTrans.RentingTransationId);
+            if (result)
+            {
+                WindowsExtesions.SuccessMessageBox("Delete successful");
+                ReloadRentTrans();
+            }
+            else
+            {
+                WindowsExtesions.ErrorMessageBox(message);
             }
         }
     }

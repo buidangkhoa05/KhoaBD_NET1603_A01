@@ -9,6 +9,7 @@ namespace PRN221.Application.Service.Interface
     public interface ICustomerService
     {
         IEnumerable<Customer> GetAll();
+        Customer GetById(int customerId);
         (bool, string) Update(Customer customer);
         (bool, string) Create(Customer customer);
         (bool, string) Delete(int customerId);

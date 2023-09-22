@@ -1,6 +1,7 @@
 ﻿
 using KhoaBD.WPF.Windows;
 using KhoaBD.WPF.Windows.Car;
+using KhoaBD.WPF.Windows.RentingTrans;
 using Microsoft.EntityFrameworkCore;
 using PRN221.Application.Service.Implement;
 using PRN221.Application.Service.Interface;
@@ -37,6 +38,7 @@ namespace KhoaBD.WPF
             services.AddTransient(typeof(CustomerWindow));
             services.AddTransient(typeof(ManipulateCustomer));
             services.AddTransient(typeof(ManipulateCarWindow));
+            services.AddTransient(typeof(DetailTransactionWindow));
             
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
@@ -45,6 +47,7 @@ namespace KhoaBD.WPF
             services.AddTransient(typeof(ICarInformationService), typeof(CarInformationService));
             services.AddTransient(typeof(IManufacturerService), typeof(ManufacturerService));
             services.AddTransient(typeof(ISupplierService), typeof(SupplierService));
+            services.AddTransient(typeof(IRentinTransactionService), typeof(RentinTransactionService));
         }
 
         protected override void OnStartup(StartupEventArgs e)

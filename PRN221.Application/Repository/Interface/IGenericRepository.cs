@@ -10,8 +10,8 @@ namespace PRN221.Application.Repository.Interface
         void Create(T entity);
         void Create(IEnumerable<T> entities);
         int Delete(Expression<Func<T, bool>> filter);
-        void Update(T entity);
         int Update(Expression<Func<T, bool>>? predicate, Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> setPropertyCalls);
-        IEnumerable<T> GetWithCondition(Expression<Func<T, T>> selector, Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[]? includes);
+        void Update(T entity);
+        IEnumerable<T> GetWithCondition(Expression<Func<T, T>> selector, bool isTracking = true, Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[]? includes);
     }
 }

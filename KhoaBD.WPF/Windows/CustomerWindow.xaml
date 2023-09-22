@@ -7,6 +7,79 @@
         mc:Ignorable="d"
         Title="CustomerWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock HorizontalAlignment="Center" Margin="0,64,0,0" TextWrapping="Wrap" Text="CUSTOMER PAGE" VerticalAlignment="Top" Width="151" FontWeight="Bold" FontSize="18"/>
+        <TabControl>
+            <TabItem Header="Customer">
+                <Grid>
+                    <Label Content="CustomerID" HorizontalAlignment="Left" Margin="52,45,0,0" VerticalAlignment="Top" Width="84"/>
+                    <Label Content="CustomerName" HorizontalAlignment="Left" Margin="52,89,0,0" VerticalAlignment="Top" Width="96"/>
+                    <Label Content="Telephone" HorizontalAlignment="Left" Margin="52,136,0,0" VerticalAlignment="Top" Width="84"/>
+                    <Label Content="Email" HorizontalAlignment="Left" Margin="52,185,0,0" VerticalAlignment="Top" Width="84"/>
+                    <Label Content="Birthday" HorizontalAlignment="Left" Margin="52,233,0,0" VerticalAlignment="Top" Width="84"/>
+                    <Label Content="Status" HorizontalAlignment="Left" Margin="52,278,0,0" VerticalAlignment="Top" Width="84"/>
+                    <Label Content="Password" HorizontalAlignment="Left" Margin="52,325,0,0" VerticalAlignment="Top" Width="84"/>
+                    <TextBlock x:Name="tbCustomerID" HorizontalAlignment="Left" Margin="163,50,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="215"/>
+                    <TextBox x:Name="tbCustomerName" HorizontalAlignment="Left" Margin="163,93,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="429"/>
+                    <TextBox x:Name="tbPhone" HorizontalAlignment="Left" Margin="163,140,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="429"/>
+                    <TextBox x:Name="tbMail" HorizontalAlignment="Left" Margin="163,189,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="429"/>
+                    <TextBox x:Name="tbPass" HorizontalAlignment="Left" Margin="163,333,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="357"/>
+                    <TextBox x:Name="tbStatus" HorizontalAlignment="Left" Margin="163,286,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.5">
+                        <TextBox.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0.525"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBox.RenderTransform>
+                    </TextBox>
+                    <Button Content="Update" HorizontalAlignment="Left" Margin="595,365,0,0" VerticalAlignment="Top" Width="87" Click="UpdateButton_Click"/>
+                    <DatePicker x:Name="dbBirdDate" HorizontalAlignment="Left" Margin="163,235,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Button x:Name="btnReset" Content="Reset" HorizontalAlignment="Left" Margin="708,365,0,0" VerticalAlignment="Top" Width="60" Click="btnReset_Click"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Renting Transaction">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="27*"/>
+                        <ColumnDefinition Width="767*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.ColumnSpan="2">
+                        <!-- Display a message or content for regular users -->
+                        <TextBlock FontWeight="Bold" FontSize="16" Margin="10">Renting Transaction</TextBlock>
+                        <DataGrid x:Name="rentingDataGrid" SelectionMode="Single" AutoGenerateColumns="false" ItemsSource="{Binding}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn IsReadOnly="True" Header="RentingTransationId" Binding="{Binding RentingTransationId}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="RentingDate" Binding="{Binding RentingDate}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="TotalPrice" Binding="{Binding TotalPrice}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="CustomerId" Binding="{Binding CustomerId}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="RentingStatus" Binding="{Binding RentingStatus}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Grid Height="121" RenderTransformOrigin="0.5,0.5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-0.076"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+                            <!-- Add more buttons or controls as needed -->
+                            <!-- Add your buttons or other controls for managing customer information -->
+                            <Button Content="View Detail" Width="100" Height="30" Margin="5"  Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Click="ViewDetailButton_Click"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+
     </Grid>
 </Window>

@@ -11,6 +11,7 @@ namespace PRN221.Application.Service.Implement
     public class CustomerService : ICustomerService
     {
         private readonly IGenericRepository<Customer> _customerRepository;
+
         private CustomerValidator _customerValidator;
 
         private CustomerValidator CustomerValidator => (_customerValidator ??= new CustomerValidator());
@@ -128,9 +129,24 @@ namespace PRN221.Application.Service.Implement
             return _customerRepository.GetWithCondition(c => new Customer
             {
                 CustomerId = c.CustomerId
-            },
+            }, true,
                      c => c.CustomerId != customer.CustomerId
                          && c.Email == customer.Email).Any();
+        }
+
+        public Customer GetById(int customerId)
+        {
+            return _customerRepository.GetWithCondition(c => new Customer
+            {
+                CustomerBirthday = c.CustomerBirthday,
+                CustomerId = c.CustomerId,
+                CustomerName = c.CustomerName,
+                CustomerStatus = c.CustomerStatus,
+                Email = c.Email,
+                Password = c.Password,
+                RentingTransactions = c.RentingTransactions,
+                Telephone = c.Telephone
+            }, false, c => c.CustomerId == customerId, c => c.RentingTransactions).FirstOrDefault();
         }
     }
 }
